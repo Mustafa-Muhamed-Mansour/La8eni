@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable/ic_add_chat_group.xml" value="0.371875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35025641025641024" />
+        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/item_group.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/log_in_email_fragment.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/register_fragment.xml" value="0.35572916666666665" />
       </map>
     </option>
   </component>

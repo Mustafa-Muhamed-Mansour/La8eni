@@ -5,6 +5,7 @@ public class UserModel
 
     private String userRandomKey;
     private String userID;
+    private String userImage;
     private String userEmail;
     private String userName;
     private String userCity;
@@ -13,10 +14,11 @@ public class UserModel
     {
     }
 
-    public UserModel(String userRandomKey, String userID, String userEmail, String userName, String userCity)
+    public UserModel(String userRandomKey, String userID, String userImage, String userEmail, String userName, String userCity)
     {
         this.userRandomKey = userRandomKey;
         this.userID = userID;
+        this.userImage = userImage;
         this.userEmail = userEmail;
         this.userName = userName;
         this.userCity = userCity;
@@ -28,6 +30,10 @@ public class UserModel
 
     public String getUserID() {
         return userID;
+    }
+
+    public String getUserImage() {
+        return userImage;
     }
 
     public String getUserEmail() {
