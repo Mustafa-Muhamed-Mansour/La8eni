@@ -173,7 +173,7 @@ public class RegisterFragment extends Fragment
 
     private void observeRegisterViewModel()
     {
-        registerViewModel.booleanMutableLiveData.observe(requireActivity(), new Observer<Boolean>()
+        registerViewModel.booleanMutableLiveData.observe(getViewLifecycleOwner(), new Observer<Boolean>()
         {
             @Override
             public void onChanged(Boolean aBoolean)

@@ -113,7 +113,7 @@ public class LogInEmailFragment extends Fragment
             @Override
             public void onChanged(Boolean aBoolean)
             {
-                navController.navigate(R.id.action_logInEmailFragment_to_logInPhoneFragment);
+                navController.navigate(R.id.action_logInEmailFragment_to_homeFragment);
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.la8eni.login_phone;
+package com.la8eni.chat;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -15,22 +15,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.la8eni.R;
-import com.la8eni.databinding.LogInPhoneFragmentBinding;
+import com.la8eni.databinding.ChatFragmentBinding;
 
-public class LogInPhoneFragment extends Fragment
+public class ChatFragment extends Fragment
 {
 
-    private LogInPhoneFragmentBinding binding;
+
+    private ChatFragmentBinding binding;
     private NavController navController;
-    private LogInPhoneViewModel logInPhoneViewModel;
+    private ChatViewModel chatViewModel;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        binding = LogInPhoneFragmentBinding.inflate(inflater, container, false);
+        binding = ChatFragmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
@@ -38,7 +40,8 @@ public class LogInPhoneFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
-        logInPhoneViewModel = new ViewModelProvider(requireActivity()).get(LogInPhoneViewModel.class);
+        chatViewModel = new ViewModelProvider(requireActivity()).get(ChatViewModel.class);
+
 
 
     }
