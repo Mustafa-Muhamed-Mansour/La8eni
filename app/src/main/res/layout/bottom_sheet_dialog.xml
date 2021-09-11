@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardElevation="20dp"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_bottom_sheet"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_image_group"
+        />
+
+
+    <EditText
+        android:id="@+id/edit_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Group Name Here"
+        android:textColorHint="@color/black"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:background="@android:color/transparent"
+        />
+
+    <Button
+        android:id="@+id/btn_bottom_sheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Added To Group"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:backgroundTint="@color/black"
+        android:layout_margin="5dp"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

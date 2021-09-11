@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.la8eni.model.UserModel;
+import com.la8eni.model.UserEmailModel;
 
 import java.util.Objects;
 
@@ -51,8 +51,8 @@ public class RegisterViewModel extends ViewModel
                                     public void onSuccess(Uri uri)
                                     {
                                         booleanMutableLiveData.setValue(true);
-                                        UserModel userModel = new UserModel(uRandomKey, uID, uri.toString(), email, name, city);
-                                        userRef.child("Users").child(uID).setValue(userModel);
+                                        UserEmailModel userEmailModel = new UserEmailModel(uRandomKey, uID, uri.toString(), email, name, city);
+                                        userRef.child("Users").child(uID).setValue(userEmailModel);
                                     }
                                 }).addOnFailureListener(new OnFailureListener()
                                 {

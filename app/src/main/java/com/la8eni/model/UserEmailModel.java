@@ -1,6 +1,6 @@
 package com.la8eni.model;
 
-public class UserModel
+public class UserEmailModel
 {
 
     private String userRandomKey;
@@ -10,11 +10,11 @@ public class UserModel
     private String userName;
     private String userCity;
 
-    public UserModel()
+    public UserEmailModel()
     {
     }
 
-    public UserModel(String userRandomKey, String userID, String userImage, String userEmail, String userName, String userCity)
+    public UserEmailModel(String userRandomKey, String userID, String userImage, String userEmail, String userName, String userCity)
     {
         this.userRandomKey = userRandomKey;
         this.userID = userID;
