@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.la8eni.R;
+import com.la8eni.chat.ChatFragment;
 import com.la8eni.databinding.LogInPhoneFragmentBinding;
 
 public class LogInPhoneFragment extends Fragment

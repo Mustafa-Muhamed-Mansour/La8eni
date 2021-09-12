@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.la8eni.constant.VariableConstant;
 import com.la8eni.model.GroupModel;
 
 import java.util.ArrayList;
@@ -26,9 +27,7 @@ public class HomeViewModel extends ViewModel
 {
 
     private ArrayList<GroupModel> groupModels = new ArrayList<>();
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private DatabaseReference groupRef = FirebaseDatabase.getInstance().getReference();
-    private StorageReference imageGroupRef = FirebaseStorage.getInstance().getReference().child("Images").child("Groups'_Image").child(Objects.requireNonNull(groupRef.push().getKey()));
+    private StorageReference imageGroupRef = FirebaseStorage.getInstance().getReference().child("Images").child("Groups'_Image").child(Objects.requireNonNull(VariableConstant.groupRef.push().getKey()));
     private MutableLiveData<String> stringMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> booleanMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<ArrayList<GroupModel>> groupModelMutableLiveData = new MutableLiveData<>();
@@ -36,8 +35,6 @@ public class HomeViewModel extends ViewModel
 
     public void addedGroup(String groupImage, String groupName)
     {
-        String gRandomKey = groupRef.push().getKey();
-        String gID = firebaseAuth.getCurrentUser().getUid();
         imageGroupRef.putFile(Uri.parse(groupImage)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
         {
             @Override
@@ -49,8 +46,8 @@ public class HomeViewModel extends ViewModel
                     public void onSuccess(Uri uri)
                     {
                         booleanMutableLiveData.setValue(true);
-                        GroupModel groupModel = new GroupModel(gRandomKey, gID, groupName, uri.toString());
-                        groupRef.child("Groups").child(gRandomKey).setValue(groupModel);
+                        GroupModel groupModel = new GroupModel(VariableConstant.groupRandomKey, VariableConstant.groupID, groupName, uri.toString());
+                        VariableConstant.groupRef.child("Groups").child(Objects.requireNonNull(VariableConstant.groupRandomKey)).setValue(groupModel);
                     }
                 }).addOnFailureListener(new OnFailureListener()
                 {
@@ -76,7 +73,7 @@ public class HomeViewModel extends ViewModel
 
     public void retriveGroups()
     {
-        groupRef
+        VariableConstant.groupRef
                 .child("Groups")
                 .addValueEventListener(new ValueEventListener()
                 {

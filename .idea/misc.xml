@@ -6,21 +6,28 @@
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/ic_add_chat_group.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/ic_image_group.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/ic_message.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/ic_more.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/ic_send.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable/ic_setting.xml" value="0.371875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35025641025641024" />
         <entry key="app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/chat_fragment.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/item_chat.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/item_group.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/item_left_chat.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/item_request_chat.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/item_right_chat.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_send_chat.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/log_in_email_fragment.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/log_in_phone_fragment.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/register_fragment.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/setting_fragment.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/share_bottom_dialog.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/menu/home_menu.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/menu/message_menu.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/menu/popup_menu.xml" value="0.35572916666666665" />
       </map>
     </option>

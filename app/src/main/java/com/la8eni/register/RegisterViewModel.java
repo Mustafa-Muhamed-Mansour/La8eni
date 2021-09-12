@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.la8eni.constant.VariableConstant;
 import com.la8eni.model.UserEmailModel;
 
 import java.util.Objects;
@@ -22,24 +23,20 @@ import java.util.Objects;
 public class RegisterViewModel extends ViewModel
 {
 
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private DatabaseReference userRef = FirebaseDatabase.getInstance().getReference();
-    private StorageReference imageUserRef = FirebaseStorage.getInstance().getReference().child("Images").child("Users'_Image").child(Objects.requireNonNull(userRef.push().getKey()));
+    private StorageReference imageUserRef = FirebaseStorage.getInstance().getReference().child("Images").child("Users'_Image").child(Objects.requireNonNull(VariableConstant.userRef.push().getKey()));
     private MutableLiveData<String> stringMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> booleanMutableLiveData = new MutableLiveData<>();
 
 
     public void registerEmail(String image, String email, String password, String name, String city)
     {
-        firebaseAuth
+        VariableConstant.firebaseAuth
                 .createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>()
                 {
                     @Override
                     public void onSuccess(AuthResult authResult)
                     {
-                        String uRandomKey = userRef.push().getKey();
-                        String uID = firebaseAuth.getCurrentUser().getUid();
                         imageUserRef.putFile(Uri.parse(image)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
                         {
                             @Override
@@ -51,8 +48,8 @@ public class RegisterViewModel extends ViewModel
                                     public void onSuccess(Uri uri)
                                     {
                                         booleanMutableLiveData.setValue(true);
-                                        UserEmailModel userEmailModel = new UserEmailModel(uRandomKey, uID, uri.toString(), email, name, city);
-                                        userRef.child("Users").child(uID).setValue(userEmailModel);
+                                        UserEmailModel userEmailModel = new UserEmailModel(VariableConstant.userRandomKey, VariableConstant.User_ID, uri.toString(), email, name, city);
+                                        VariableConstant.userRef.child("Users").child(VariableConstant.User_ID).setValue(userEmailModel);
                                     }
                                 }).addOnFailureListener(new OnFailureListener()
                                 {

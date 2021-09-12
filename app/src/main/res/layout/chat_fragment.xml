@@ -21,14 +21,14 @@
             >
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/item_circle_group_img"
+                android:id="@+id/circle_group_img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
                 />
 
             <TextView
-                android:id="@+id/item_txt_group_name"
+                android:id="@+id/txt_group_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -39,6 +39,15 @@
                 />
 
         </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/teal_700"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -54,21 +63,56 @@
             android:id="@+id/linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="end"
+            >
 
-            <EditText
-                android:id="@+id/edit_message"
+
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="Enter message Here"
-                android:textColorHint="@color/black"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:background="@android:color/transparent"
-                android:layout_margin="5dp"
-                android:paddingStart="5dp"
-                android:layout_gravity="center" />
+                >
+
+                <EditText
+                    android:id="@+id/edit_send_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/transparent"
+                    android:hint="Enter message Here"
+                    android:paddingStart="5dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp"
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circle_send_img"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_add_image_profile"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    />
+
+            </RelativeLayout>
+
+<!--            <ImageButton-->
+<!--                android:id="@+id/img_btn_more"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:backgroundTint="@color/white"-->
+<!--                android:src="@drawable/ic_more"-->
+<!--                android:clickable="false"-->
+<!--                android:focusable="false"-->
+<!--                />-->
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_send_message"

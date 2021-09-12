@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.la8eni.R;
+import com.la8eni.constant.VariableConstant;
 import com.la8eni.databinding.RegisterFragmentBinding;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -32,7 +33,7 @@ public class RegisterFragment extends Fragment
     private RegisterFragmentBinding binding;
     private NavController navController;
     private RegisterViewModel registerViewModel;
-    private String image;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -88,43 +89,43 @@ public class RegisterFragment extends Fragment
                 String name = binding.editNameRegister.getText().toString();
                 String city = binding.editCityRegister.getText().toString();
 
-                if (image == null)
+                if (VariableConstant.registerImage == null)
                 {
-                    Snackbar.make(binding.parentRegisterLinearLayout, "Please enter your picture", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(binding.parentRegisterNestedScrollLayout, "Please enter your picture", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(email))
                 {
-                    Snackbar.make(binding.parentRegisterLinearLayout, "Please enter your email", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(binding.parentRegisterNestedScrollLayout, "Please enter your email", Snackbar.LENGTH_SHORT).show();
                     binding.editEmailRegister.requestFocus();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password))
                 {
-                    Snackbar.make(binding.parentRegisterLinearLayout, "Please enter your password", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(binding.parentRegisterNestedScrollLayout, "Please enter your password", Snackbar.LENGTH_SHORT).show();
                     binding.editPasswordRegister.requestFocus();
                     return;
                 }
 
                 if (TextUtils.isEmpty(name))
                 {
-                    Snackbar.make(binding.parentRegisterLinearLayout, "Please enter your name", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(binding.parentRegisterNestedScrollLayout, "Please enter your name", Snackbar.LENGTH_SHORT).show();
                     binding.editNameRegister.requestFocus();
                     return;
                 }
 
                 if (TextUtils.isEmpty(city))
                 {
-                    Snackbar.make(binding.parentRegisterLinearLayout, "Please enter your city", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(binding.parentRegisterNestedScrollLayout, "Please enter your city", Snackbar.LENGTH_SHORT).show();
                     binding.editCityRegister.requestFocus();
                     return;
                 }
 
                 else
                 {
-                    registerViewModel.registerEmail(image, email, password, name, city);
+                    registerViewModel.registerEmail(VariableConstant.registerImage, email, password, name, city);
                 }
             }
         });
@@ -148,7 +149,7 @@ public class RegisterFragment extends Fragment
             if (resultCode == RESULT_OK)
             {
                 Uri imagetUri = result.getUri();
-                image = imagetUri.toString();
+                VariableConstant.registerImage = imagetUri.toString();
 
                 Glide
                         .with(getActivity())
@@ -160,13 +161,13 @@ public class RegisterFragment extends Fragment
             else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE)
             {
                 Exception error = result.getError();
-                Snackbar.make(binding.parentRegisterLinearLayout, Objects.requireNonNull(error.getMessage()), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(binding.parentRegisterNestedScrollLayout, Objects.requireNonNull(error.getMessage()), Snackbar.LENGTH_SHORT).show();
             }
         }
 
         else
         {
-            Snackbar.make(binding.parentRegisterLinearLayout, result.getError().toString(), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(binding.parentRegisterNestedScrollLayout, result.getError().toString(), Snackbar.LENGTH_SHORT).show();
         }
     }
 

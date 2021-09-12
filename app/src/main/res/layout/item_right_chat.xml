@@ -15,19 +15,8 @@
         android:textAllCaps="false"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:layout_gravity="end"
         />
 
-    <TextView
-        android:id="@+id/item_txt_chat_send_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:layout_gravity="end"
-        android:textSize="10sp"
-        android:textColor="@color/black"
-        android:textAllCaps="false"
-        android:layout_margin="5dp"
-        android:padding="5dp"
-        />
 
 </LinearLayout>

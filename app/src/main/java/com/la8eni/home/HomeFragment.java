@@ -2,6 +2,7 @@ package com.la8eni.home;
 
 import static android.app.Activity.RESULT_OK;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -12,6 +13,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -23,8 +25,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -33,9 +40,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.snackbar.Snackbar;
 import com.la8eni.R;
 import com.la8eni.adapter.group.GroupAdapter;
+import com.la8eni.constant.VariableConstant;
 import com.la8eni.databinding.HomeFragmentBinding;
 import com.la8eni.model.GroupModel;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -61,6 +70,13 @@ public class HomeFragment extends Fragment
     private GroupAdapter groupAdapter;
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -178,6 +194,35 @@ public class HomeFragment extends Fragment
         {
             Toast.makeText(getActivity(), result.getError().getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater)
+    {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.home_menu, menu);
+
+
+        MenuItem item = menu.getItem(0);
+        SpannableString spannableString = new SpannableString(menu.getItem(0).getTitle().toString());
+        spannableString.setSpan(new ForegroundColorSpan(Color.WHITE), 0, spannableString.length(), 0);
+        item.setTitle(spannableString);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.menu_logout:
+                navController.navigate(R.id.action_homeFragment_to_registerFragment);
+                VariableConstant.firebaseAuth.signOut();
+                break;
+            default:
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return true;
     }
 
     private void observeDataViewModel()
