@@ -1,10 +1,8 @@
 package com.la8eni.chat;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import static android.app.Activity.RESULT_OK;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -21,16 +19,12 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import com.la8eni.R;
 import com.la8eni.adapter.chat.ChatAdapter;
 import com.la8eni.constant.VariableConstant;
 import com.la8eni.databinding.ChatFragmentBinding;
 import com.la8eni.model.ChatMessageModel;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
+
 import java.util.ArrayList;
 
 public class ChatFragment extends Fragment

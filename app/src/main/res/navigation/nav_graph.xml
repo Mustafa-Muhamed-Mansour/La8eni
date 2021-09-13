@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/logInEmailFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/logInEmailFragment"
@@ -79,4 +79,17 @@
         android:name="com.la8eni.chat.ChatFragment"
         android:label="chat_fragment"
         tools:layout="@layout/chat_fragment" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.la8eni.ui.splash.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash"
+        >
+        <action
+            android:id="@+id/action_splashFragment_to_logInEmailFragment"
+            app:destination="@id/logInEmailFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 </navigation>
