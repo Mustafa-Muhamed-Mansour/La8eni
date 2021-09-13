@@ -12,4 +12,14 @@
         android:title="Send Image"
         />
 
+    <item
+        android:id="@+id/menu_send_pdf"
+        android:title="Send PDF"
+        />
+
+    <item
+        android:id="@+id/menu_send_word"
+        android:title="Send Word"
+        />
+
 </menu>

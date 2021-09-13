@@ -215,8 +215,8 @@ public class HomeFragment extends Fragment
         switch (item.getItemId())
         {
             case R.id.menu_logout:
-                navController.navigate(R.id.action_homeFragment_to_registerFragment);
                 VariableConstant.firebaseAuth.signOut();
+                navController.navigate(R.id.action_homeFragment_to_registerFragment);
                 break;
             default:
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
@@ -255,7 +255,6 @@ public class HomeFragment extends Fragment
     {
         super.onDestroyView();
 
-        homeViewModel.booleanMutableLiveData.removeObservers(getViewLifecycleOwner());
         homeViewModel.groupModelMutableLiveData.removeObservers(getViewLifecycleOwner());
     }
 }

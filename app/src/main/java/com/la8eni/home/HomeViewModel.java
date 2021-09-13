@@ -29,7 +29,7 @@ public class HomeViewModel extends ViewModel
     private ArrayList<GroupModel> groupModels = new ArrayList<>();
     private StorageReference imageGroupRef = FirebaseStorage.getInstance().getReference().child("Images").child("Groups'_Image").child(Objects.requireNonNull(VariableConstant.groupRef.push().getKey()));
     private MutableLiveData<String> stringMutableLiveData = new MutableLiveData<>();
-    public MutableLiveData<Boolean> booleanMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> booleanMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<ArrayList<GroupModel>> groupModelMutableLiveData = new MutableLiveData<>();
 
 

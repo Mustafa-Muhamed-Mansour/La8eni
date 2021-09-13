@@ -1,5 +1,6 @@
 package com.la8eni.adapter.chat;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         return new ChatViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position)
     {
@@ -96,7 +98,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     {
 
         private TextView textMessage;
-
 
         public ChatViewHolder(@NonNull View itemView)
         {

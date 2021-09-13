@@ -49,12 +49,13 @@
         android:label="register_fragment"
         tools:layout="@layout/register_fragment" >
         <action
-            android:id="@+id/action_registerFragment_to_logInEmailFragment"
-            app:destination="@id/logInEmailFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_registerFragment_to_homeFragment"
             app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_registerFragment_to_logInEmailFragment"
+            app:destination="@id/logInEmailFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>

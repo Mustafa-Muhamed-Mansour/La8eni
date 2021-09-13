@@ -8,6 +8,8 @@ import static android.app.Activity.RESULT_OK;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,7 +38,7 @@ public class ChatFragment extends Fragment
 
     private ChatFragmentBinding binding;
     private NavController navController;
-    private ArrayList<ChatMessageModel> chatMessageModels;
+    private ChatViewModel chatViewModel;
     private ChatAdapter chatAdapter;
 
     @Override
@@ -53,10 +55,7 @@ public class ChatFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
-
-
-        //Initial ArrayList and adapter
-        initialViews();
+        chatViewModel = new ViewModelProvider(requireActivity()).get(ChatViewModel.class);
 
         //retriveBundle from Adapter
         retriveBundle();
@@ -64,19 +63,11 @@ public class ChatFragment extends Fragment
         //Clicked Views (FAB and image Button to a More)
         clickedViews();
 
-        //retriveData from Database
-        retriveData();
+
+        //observe retriveDataChat ViewModel
+        observeDataViewModel();
 
     }
-
-    private void initialViews()
-    {
-        chatMessageModels = new ArrayList<>();
-        chatAdapter = new ChatAdapter(chatMessageModels);
-        binding.rVChat.setAdapter(chatAdapter);
-        binding.rVChat.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-    }
-
 
     private void retriveBundle()
     {
@@ -95,46 +86,81 @@ public class ChatFragment extends Fragment
 
     private void clickedViews()
     {
-//        binding.imgBtnMore.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                PopupMenu popupMenu = new PopupMenu(getActivity(), view);
-//                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
-//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener()
-//                {
-//                    @Override
-//                    public boolean onMenuItemClick(MenuItem menuItem)
-//                    {
-//                        switch (menuItem.getItemId())
-//                        {
-//                            case R.id.menu_send_message:
-//                                binding.editSendMessage.setVisibility(View.VISIBLE);
-//                                binding.circleSendImg.setVisibility(View.GONE);
-//                                break;
-//                            case R.id.menu_send_image:
-//                                binding.editSendMessage.setVisibility(View.GONE);
-//                                binding.circleSendImg.setVisibility(View.VISIBLE);
-//                                binding.circleSendImg.setOnClickListener(new View.OnClickListener()
-//                                {
-//                                    @Override
-//                                    public void onClick(View view)
-//                                    {
+        binding.imgBtnMore.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                PopupMenu popupMenu = new PopupMenu(getActivity(), view);
+                popupMenu.getMenuInflater().inflate(R.menu.message_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener()
+                {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem)
+                    {
+                        switch (menuItem.getItemId())
+                        {
+                            case R.id.menu_send_message:
+                                binding.editSendMessage.setVisibility(View.VISIBLE);
+                                binding.circleSendImg.setVisibility(View.GONE);
+                                binding.circleSendPdf.setVisibility(View.GONE);
+                                binding.circleSendWord.setVisibility(View.GONE);
+                                break;
+                            case R.id.menu_send_image:
+                                binding.circleSendImg.setVisibility(View.VISIBLE);
+                                binding.editSendMessage.setVisibility(View.GONE);
+                                binding.circleSendPdf.setVisibility(View.GONE);
+                                binding.circleSendWord.setVisibility(View.GONE);
+                                binding.circleSendImg.setOnClickListener(new View.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
 //                                        openGallery();
-//                                    }
-//                                });
-//                                break;
-//                            default:
-//                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-//                                break;
-//                        }
-//                        return true;
-//                    }
-//                });
-//                popupMenu.show();
-//            }
-//        });
+                                        Toast.makeText(getActivity(), "Comming Soon", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                break;
+                            case R.id.menu_send_pdf:
+                                binding.circleSendPdf.setVisibility(View.VISIBLE);
+                                binding.editSendMessage.setVisibility(View.GONE);
+                                binding.circleSendImg.setVisibility(View.GONE);
+                                binding.circleSendWord.setVisibility(View.GONE);
+                                binding.circleSendPdf.setOnClickListener(new View.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+//                                        openFilePdf();
+                                        Toast.makeText(getActivity(), "Comming Soon", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                break;
+                            case R.id.menu_send_word:
+                                binding.circleSendWord.setVisibility(View.VISIBLE);
+                                binding.editSendMessage.setVisibility(View.GONE);
+                                binding.circleSendImg.setVisibility(View.GONE);
+                                binding.circleSendPdf.setVisibility(View.GONE);
+                                binding.circleSendWord.setOnClickListener(new View.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+//                                        openFileWord();
+                                        Toast.makeText(getActivity(), "Comming Soon", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                break;
+                            default:
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
 
         binding.fabSendMessage.setOnClickListener(new View.OnClickListener()
         {
@@ -152,7 +178,6 @@ public class ChatFragment extends Fragment
 
                 else
                 {
-
                     ChatMessageModel chatMessageModel = new ChatMessageModel(VariableConstant.chatRandomKey, VariableConstant.chatUserID, sendMessage, VariableConstant.textMessage);
                     VariableConstant.chatRef.child("Groups").child(VariableConstant.randomKey).child("Chats").child(VariableConstant.chatRandomKey).setValue(chatMessageModel);
                     binding.editSendMessage.getText().clear();
@@ -161,33 +186,7 @@ public class ChatFragment extends Fragment
         });
     }
 
-    private void retriveData()
-    {
-        VariableConstant
-                .chatRef
-                .child("Groups")
-                .child(VariableConstant.randomKey)
-                .child("Chats")
-                .addValueEventListener(new ValueEventListener()
-                {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot)
-                    {
-                        chatMessageModels.clear();
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren())
-                        {
-                            ChatMessageModel chatMessageModel = dataSnapshot.getValue(ChatMessageModel.class);
-                            chatMessageModels.add(chatMessageModel);
-                        }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error)
-                    {
-                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
 
 //    private void openGallery()
 //    {
@@ -227,14 +226,53 @@ public class ChatFragment extends Fragment
 //            Toast.makeText(getActivity(), result.getError().getMessage(), Toast.LENGTH_SHORT).show();
 //        }
 //    }
+//
+//    private void openFilePdf()
+//    {
+//        Intent intentPdf = new Intent();
+//        intentPdf.setAction(Intent.ACTION_GET_CONTENT);
+//        intentPdf.setType("application/pdf");
+//        startActivityForResult(Intent.createChooser(intentPdf, "Select PDF File"), 438);
+//    }
+//
+//    private void openFileWord()
+//    {
+//        Intent intentMsWord = new Intent();
+//        intentMsWord.setAction(Intent.ACTION_GET_CONTENT);
+//        intentMsWord.setType("application/msword");
+//        startActivityForResult(intentMsWord.createChooser(intentMsWord, "Select Ms Word File"), 438);
+//    }
 
-    @SuppressLint("NotifyDataSetChanged")
+    private void observeDataViewModel()
+    {
+        chatViewModel.chatMutableLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<ChatMessageModel>>()
+        {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onChanged(ArrayList<ChatMessageModel> chatMessageModels)
+            {
+                chatAdapter = new ChatAdapter(chatMessageModels);
+                binding.rVChat.setAdapter(chatAdapter);
+                binding.rVChat.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+                chatAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
     @Override
     public void onStart()
     {
         super.onStart();
 
-        chatAdapter.notifyDataSetChanged();
+        chatViewModel.retriveData();
     }
 
+
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+
+        chatViewModel.chatMutableLiveData.removeObservers(getViewLifecycleOwner());
+    }
 }
